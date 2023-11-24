@@ -38,10 +38,31 @@ public class register extends AppCompatActivity {
                 }else{
                     if (password_s.equals(confirm_s)){
                         Boolean checkEmail = db.checkUsername(name_s);
-
+                        if (checkEmail == false){
+                            Boolean valEmail = isEmailValid(name_s);
+                            if (valEmail){
+                                Boolean insert = db.insert(name_s, password_s);
+                                if (insert==true){
+                                    Toast.makeText(getApplicationContext(), "Account Registered", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    Toast.makeText(getApplicationContext(), "Not Registered", Toast.LENGTH_SHORT).show();
+                                }
+                            }else{
+                                Toast.makeText(getApplicationContext(), "Not a Valid Email", Toast.LENGTH_SHORT).show();
+                            }
+                        }else{
+                            Toast.makeText(getApplicationContext(), "User Already Exists", Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Passwords don't match", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
         });
+    }
+    public static boolean isEmailValid(String email) {
+        boolean isValid = false;
+
+        String expression = 
     }
 }
